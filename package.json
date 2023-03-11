@@ -1,0 +1,15 @@
+{
+  "name": "nodetellomock",
+  "version": "1.0.0",
+  "description": "Mock test server for DJI Tello interface development",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "JBHipple",
+  "license": "ISC",
+  "dependencies": {
+    "dgram": "^1.0.1"
+  }
+}
