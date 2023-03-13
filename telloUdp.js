@@ -82,9 +82,9 @@ function validateCommand(command){
         // Else, check if the command is in the list of read commands and has a param by error
         if(paramCommands.includes(commandArr[0])){
             // TODO - Add logic to check against each command's required parameters
-            //validateParameters(commandArr);
+            validateParamResp = validateParameters(commandArr);
 
-            retObject.valid = true;
+            retObject = validateParamResp;
         } else if(noParamCommands.includes(commandArr[0]) || readCommands.includes(commandArr[0])){
             // The command that was passed in contained a parameter and should not have one
             retObject.valid = false;
@@ -111,4 +111,52 @@ function validateCommand(command){
         retObject.message = 'Command ' + command + ' did not evaluate...';
     }
     return retObject;
+}
+
+function validateParameters(commandArr){
+    
+    // Create the return object
+    paramRetObject = {};
+    paramRetObject.valid = true;
+
+    // Evaluate for the correct command
+    switch(commandArr[0]){
+        case 'up':
+        case 'down':
+        case 'left':
+        case 'right':
+        case 'forward':
+        case 'back':
+            if(commandArr.length > 2){
+                paramRetObject.valid = false;
+                paramRetObject.message = "Too many parameters for this command.";
+                break;
+            } else{
+                var x = commandArr[1];
+                if(x < 20 || x > 500){
+                    paramRetObject.valid = false;
+                    paramRetObject.message = "Movement command parameter must be a number between 20 and 500.";
+                    break;
+                }
+            }
+        case 'cw':
+        case 'ccw':
+            if(commandArr.length > 2){
+                paramRetObject.valid = false;
+                paramRetObject.message = "Too many parameters for this command.";
+                break;
+            } else{
+                var x = commandArr[1];
+                if(x < 20 || x > 500){
+                    paramRetObject.valid = false;
+                    paramRetObject.message = "Movement command parameter must be a number between 1 and 360.";
+                    break;
+                }
+            }
+        
+            
+    }
+
+    return paramRetObject;
+
 }
